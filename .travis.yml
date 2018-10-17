@@ -6,10 +6,10 @@ jdk:
 sudo: true
 
 # required to update jdk, there is a compile error with the default version on Travis
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
+#addons:
+#  apt:
+#    packages:
+#      - oracle-java8-installer
 
 env:
   global:
