@@ -47,10 +47,11 @@ abstract class SmartJDKLoader() extends LibraryLoader {
 object SmartJDKLoader {
 
   private val candidates = Seq(
-    "/usr/lib/jvm",                     // linux style
-    "C:\\Program Files\\Java\\",        // windows style
-    "C:\\Program Files (x86)\\Java\\",  // windows 32bit style
-    "/Library/Java/JavaVirtualMachines" // mac style
+    "/usr/lib/jvm",                      // linux style
+    "C:\\Program Files\\Java\\",         // windows style
+    "C:\\Program Files (x86)\\Java\\",   // windows 32bit style
+    "/Library/Java/JavaVirtualMachines", // mac style
+    System.getProperty("user.home") + ".jabba/jdk" // jabba (for github actions)
   )
 
   def getOrCreateJDK(languageLevel: LanguageLevel = LanguageLevel.JDK_11): Sdk = {
