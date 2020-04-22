@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: olafurpg/setup-scala@v5
       with:
-        - java-version: adopt@1.8
+        java-version: adopt@1.8
     - name: Install JDK 8
       run: jabba install adopt@1.8
     - name: Install JDK 11
