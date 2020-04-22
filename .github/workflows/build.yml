@@ -2,9 +2,9 @@ name: Scala Plugin Build
 
 on:
   push:
-    branches: [ idea202.x ]
+    branches: [ idea201.x ]
   pull_request:
-    branches: [ idea202.x ]
+    branches: [ idea201.x ]
 
 jobs:
   build:
