@@ -51,7 +51,7 @@ object SmartJDKLoader {
     "C:\\Program Files\\Java\\",         // windows style
     "C:\\Program Files (x86)\\Java\\",   // windows 32bit style
     "/Library/Java/JavaVirtualMachines", // mac style
-    System.getProperty("user.home") + ".jabba/jdk" // jabba (for github actions)
+    System.getProperty("user.home") + "/.jabba/jdk" // jabba (for github actions)
   )
 
   def getOrCreateJDK(languageLevel: LanguageLevel = LanguageLevel.JDK_11): Sdk = {
