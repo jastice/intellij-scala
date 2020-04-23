@@ -93,15 +93,16 @@ object SmartJDKLoader {
 
   private def findJDK(dir: File) = {
     val macDir = new File(dir, "/Contents/Home") // mac workaround
-    val jdkDir = if (macDir.isDirectory) macDir else dir
-    assert(jdkDir.isDirectory, s"looked for jdk in ${jdkDir.getAbsolutePath} but is not a directory")
-    val isJdk = jdkDir
-      .listFiles()
-      .exists { b =>
-        b.getName == "bin" &&
-          b.listFiles().exists(x => x.getName == "javac.exe" || x.getName == "javac")
-      }
-    if (isJdk) Some(jdkDir) else None
+    val candidates = List(macDir, dir)
+    candidates
+      .filter(_.isDirectory)
+      .find { _
+        .listFiles()
+        .exists { b =>
+          b.getName == "bin" &&
+            b.listFiles().exists(x => x.getName == "javac.exe" || x.getName == "javac")
+        }
+    }
   }
 
   private def inJvm(path: String, suffix: String) = {
