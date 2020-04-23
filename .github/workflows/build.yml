@@ -22,5 +22,25 @@ jobs:
       run: jabba install adopt@1.11.0-6
     - name: package and compile tests
       run: sbt clean packagePlugin test:compile
+    - name: Cache coursier cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.coursier/cache
+          key: ${{ runner.os }}-coursier-cache-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/**/*.scala') }}
+    - name: Cache ivy cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.ivy2/cache
+        key: ${{ runner.os }}-ivy-cache-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/**/*.scala') }}
+    - name: Cache sbt
+      uses: actions/cache@v1
+      with:
+        path: ~/.sbt
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/**/*.scala') }}
+    - name: Cache IntelliJ SDK
+      uses: actions/cache@v1
+      with:
+        path: ~/.ScalaPluginIC
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/**/*.scala') }}
     - name: assorted tests
       run: sbt runFastTests
