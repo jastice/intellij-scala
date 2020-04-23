@@ -49,7 +49,7 @@ jobs:
           - ${{ runner.os }}-idea
     - name: compile & package
       run: sbt -no-colors clean packagePlugin test:compile
-    - name: assorted tests
-      run: sbt -no-colors runFastTests
     - name: typechecker tests
       run: sbt -no-colors runTypeInferenceTests
+#    - name: assorted tests
+#      run: sbt -no-colors runFastTests
