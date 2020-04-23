@@ -48,8 +48,8 @@ jobs:
         restore-keys:
           - ${{ runner.os }}-idea
     - name: compile & package
-      run: sbt clean packagePlugin test:compile
+      run: sbt -no-colors clean packagePlugin test:compile
     - name: assorted tests
-      run: sbt runFastTests
+      run: sbt -no-colors runFastTests
     - name: typechecker tests
-      run: sbt runTypeInferenceTests
+      run: sbt -no-colors runTypeInferenceTests
