@@ -1,10 +1,6 @@
-name: Scala Plugin Build
+name: Scala Plugin Build & Test
 
-on:
-  push:
-    branches: [ idea20[1-9].x ]
-  pull_request:
-    branches: [ idea20[1-9].x ]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -48,11 +44,12 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.ScalaPluginIC/sdk
-        key: ${{ runner.os }}-idea-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('project/**/*.scala') }}
+        key: ${{ runner.os }}-idea-${{ hashFiles('project/**/*.scala') }}
         restore-keys:
-          - ${{ runner.os }}-idea-${{ hashFiles('**/*.sbt') }}
-          - ${{ runner.os }}
-    - name: package and compile tests
+          - ${{ runner.os }}-idea
+    - name: compile & package
       run: sbt clean packagePlugin test:compile
     - name: assorted tests
       run: sbt runFastTests
+    - name: typechecker tests
+      run: sbt runTypeInferenceTests
