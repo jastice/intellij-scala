@@ -1,9 +1,13 @@
 name: Scala Plugin Build & Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ idea20[1-9].x ]
+  pull_request:
+    branches: [ idea20[1-9].x ]
 
 jobs:
-  build:
+  build and test:
 
     runs-on: ubuntu-latest
 
@@ -51,5 +55,5 @@ jobs:
       run: sbt -no-colors clean packagePlugin test:compile
     - name: typechecker tests
       run: sbt -no-colors runTypeInferenceTests
-#    - name: assorted tests
-#      run: sbt -no-colors runFastTests
+    - name: assorted tests
+      run: sbt -no-colors runFastTests
